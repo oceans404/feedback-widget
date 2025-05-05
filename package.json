@@ -1,0 +1,23 @@
+{
+  "name": "feedback-widget",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server/server.js",
+    "build:widget": "mkdir -p dist && cp public/widget.js dist/",
+    "build:server": "mkdir -p dist/server && cp -r server/* dist/server/ && cp package.json dist/server/",
+    "deploy:widget": "npm run build:widget && wrangler pages publish dist",
+    "deploy:server": "npm run build:server"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "secretvaults": "^0.1.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.28.1"
+  }
+}
