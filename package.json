@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "node server/server.js",
-    "build:widget": "mkdir -p dist && cp public/widget.js dist/",
+    "build:widget": "mkdir -p dist && cp public/widget.js dist/widget.js",
     "build:server": "mkdir -p dist/server && cp -r server/* dist/server/ && cp package.json dist/server/",
     "deploy:widget": "npm run build:widget && wrangler pages publish dist",
     "deploy:server": "npm run build:server"
