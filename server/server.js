@@ -22,10 +22,7 @@ const __dirname = path.dirname(__filename);
 // Middleware
 app.use(
   cors({
-    origin: [
-      'https://7424ece7.feedback-widget-u8y.pages.dev',
-      'http://localhost:3000',
-    ],
+    origin: '*', // Allow all origins
     credentials: true,
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],

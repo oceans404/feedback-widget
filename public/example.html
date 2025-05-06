@@ -26,6 +26,17 @@
         color: #666;
       }
     </style>
+    <!-- Load the widget -->
+    <script
+      src="https://422c26e9.feedback-widget-u8y.pages.dev/widget.js"
+      data-server-url="https://feedback-widget-orrr.onrender.com"
+    ></script>
+    <script>
+      // Initialize the widget
+      window.embed_feedback_widget('init', 'w42u-axk4-zq53').then((config) => {
+        console.log('Widget initialized with config:', config);
+      });
+    </script>
   </head>
   <body>
     <h1>Feedback Widget Example</h1>
@@ -38,17 +49,5 @@
         Click the feedback button to open the widget and submit your feedback.
       </p>
     </div>
-
-    <!-- Load the widget -->
-    <script
-      src="https://7424ece7.feedback-widget-u8y.pages.dev/widget.js"
-      data-server-url="https://feedback-widget-orrr.onrender.com"
-    ></script>
-    <script>
-      // Initialize the widget
-      window.embed_feedback_widget('init', 'yvhs-nbfa-yvsc').then((config) => {
-        console.log('Widget initialized with config:', config);
-      });
-    </script>
   </body>
 </html>
