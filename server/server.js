@@ -20,7 +20,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      'https://7424ece7.feedback-widget-u8y.pages.dev',
+      'http://localhost:3000',
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 app.use(bodyParser.json({ limit: '10mb' })); // Increased limit for screenshots
 app.use(express.static(path.join(__dirname, '../public')));
 
@@ -132,6 +142,8 @@ app.get('/health', (req, res) => {
 app.get('/api/widget/:appId', async (req, res) => {
   try {
     const { appId } = req.params;
+    console.log('Received request for appId:', appId);
+    console.log('Request headers:', req.headers);
 
     // Query the app_ids table for the specific app_id
     const { data, error } = await supabase
@@ -148,8 +160,11 @@ app.get('/api/widget/:appId', async (req, res) => {
     }
 
     if (!data) {
+      console.log('No configuration found for appId:', appId);
       return res.status(404).json({ error: 'App configuration not found' });
     }
+
+    console.log('Found configuration:', data);
 
     // Return the configuration in the expected format
     res.json({
@@ -163,6 +178,11 @@ app.get('/api/widget/:appId', async (req, res) => {
     console.error('Error in widget configuration endpoint:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
+});
+
+// Add a test endpoint
+app.get('/test', (req, res) => {
+  res.json({ message: 'Server is running!' });
 });
 
 // Feedback submission endpoint
