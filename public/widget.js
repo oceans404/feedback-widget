@@ -16,7 +16,7 @@
       document.querySelector('script[src*="widget.js"]');
     return (
       script.getAttribute('data-server-url') ||
-      'https://your-render-app.onrender.com'
+      'https://feedback-widget.onrender.com'
     );
   };
 
