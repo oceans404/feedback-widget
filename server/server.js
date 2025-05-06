@@ -34,7 +34,6 @@ app.use(express.static(path.join(__dirname, '../public')));
 // Log environment variables (without secrets)
 console.log('Environment:');
 console.log('- PORT:', process.env.PORT);
-console.log('- NILLION_SCHEMA_ID:', process.env.NILLION_SCHEMA_ID);
 console.log('- NILLION_ORG_DID exists:', !!process.env.NILLION_ORG_DID);
 console.log('- NILLION_SECRET_KEY exists:', !!process.env.NILLION_SECRET_KEY);
 console.log('- SUPABASE_URL exists:', !!process.env.SUPABASE_URL);
@@ -107,13 +106,12 @@ async function getSecretVaultCollection(siteId) {
 
   // Initialize a new collection
   try {
-    console.log(
-      `Initializing SecretVault collection for site ${siteId} with schema ${data.schema_id}`
-    );
+    // Use the migrated schema ID if available, otherwise use the original
+    const schemaID = data.schema_id_migrated || data.schema_id;
     const collection = new SecretVaultWrapper(
       orgConfig.nodes,
       orgConfig.orgCredentials,
-      data.schema_id
+      schemaID
     );
     await collection.init();
 
